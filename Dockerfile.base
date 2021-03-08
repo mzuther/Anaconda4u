@@ -24,7 +24,24 @@
 #  ----------------------------------------------------------------------------
 
 
-FROM continuumio/anaconda3
+ARG base_image
+FROM $base_image
 
+ARG user
+ARG uid
+ARG home
+ARG jupyter_port
+
+# run as root
+USER root
 # speed up solving of conda environment
 RUN conda install mamba -n base -c conda-forge
+
+# run commands as non-root with a dedicated home directory
+RUN adduser --disabled-password --gecos GECOS --home $home --uid $uid $user
+
+# switch to new user
+USER $user
+WORKDIR $home
+
+EXPOSE $jupyter_port

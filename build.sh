@@ -72,27 +72,41 @@ source "./settings.sh"
 mkdir -p "./include"
 
 
+# build Docker base image
+printf "Building base image...\n\n"
+
+docker build \
+       --pull \
+       --file="./Dockerfile.base" \
+       --tag "$docker_base_image" \
+       --build-arg=base_image="$anaconda_distribution" \
+       --build-arg=user="$username" \
+       --build-arg=uid="$uid" \
+       --build-arg=home="$docker_home" \
+       --build-arg=jupyter_port=$jupyter_port \
+       .
+
+printf "\nDone.\n\n\n"
+
+
 # create Jupyter Lab configuration
 copy_setting "jupyter_notebook_config.py" "./include"
 generate_jupyter_password
 generate_tls_certificate "$jupyter_cert_file"
 
 
-# build Docker base image
-docker build \
-       --pull \
-       --file="./Dockerfile.base" \
-       --tag "$docker_base_image" \
-       .
+# build Docker worker image
+printf "Building worker image...\n\n"
 
-
-# build Docker image
 docker build \
        --file="./Dockerfile" \
        --tag "$docker_image" \
        --build-arg=base_image="$docker_base_image" \
        --build-arg=user="$username" \
        --build-arg=uid="$uid" \
+       --build-arg=home="$docker_home" \
        --build-arg=jupyter_port=$jupyter_port \
        "$@" \
        .
+
+printf "\nDone.\n"

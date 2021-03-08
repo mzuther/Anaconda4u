@@ -29,13 +29,11 @@ FROM $base_image
 
 ARG user
 ARG uid
+ARG home
 ARG jupyter_port
-ENV home=/home/$user
-
-# run commands as non-root with a dedicated home directory
-RUN adduser --disabled-password --gecos GECOS --home $home --uid $uid $user
 
 # run as root
+USER root
 RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
 
@@ -43,7 +41,10 @@ RUN mamba install --yes --channel conda-forge xgboost
 USER $user
 WORKDIR $home
 
+# copy user settings ("--chown" ensures that copies are owned by user)
 COPY --chown=$user ./include/* $home/.include/
+
+# allow storage of Jupyter settings by linking to shared volume
 RUN ln -s $home/shared/.jupyter $home
 
 EXPOSE $jupyter_port
