@@ -69,6 +69,7 @@ function generate_tls_certificate {
 # bootstrap
 copy_setting "settings.sh" .
 source "./settings.sh"
+mkdir -p "./include"
 
 
 # create Jupyter Lab configuration
