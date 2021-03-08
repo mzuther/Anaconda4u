@@ -44,7 +44,10 @@ WORKDIR $home
 # copy user settings ("--chown" ensures that copies are owned by user)
 COPY --chown=$user ./include/* $home/.include/
 
+# change .bashrc from outside
+RUN ln -sf $home/.include/.bashrc $home
+
 # allow storage of Jupyter settings by linking to shared volume
-RUN ln -s $home/Documents/.jupyter $home
+RUN ln -sf $home/Documents/.jupyter $home
 
 EXPOSE $jupyter_port
