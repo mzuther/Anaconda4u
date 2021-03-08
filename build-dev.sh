@@ -27,11 +27,11 @@
 
 
 printf "\n"
-printf "o====================================================================o\n"
-printf "|                                                                    |\n"
-printf "|  WARNING: this script will overwrite all settings in \"./include\"!  |\n"
-printf "|                                                                    |\n"
-printf "o====================================================================o\n"
+printf "o===============================================================o\n"
+printf "|                                                               |\n"
+printf "|  WARNING: this script may overwrite settings in \"./include\"!  |\n"
+printf "|                                                               |\n"
+printf "o===============================================================o\n"
 printf "\n"
 
 export force_copy=true

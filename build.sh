@@ -26,21 +26,22 @@
 #  ----------------------------------------------------------------------------
 
 
-function copy_setting {
-    src="data/$1"
-    dest="$2/$1"
+function copy_settings {
+    mkdir -p "./include"
 
     # check whether variable "force_copy" exists
     # (https://stackoverflow.com/a/13864829)
     if [ ${force_copy+x} ]; then
-        rm -f "$dest"
+        printf "Copying differing files from \"./data/\" to \".\"...\n\n"
+
+        rsync -avAHX --update "./data/" "."
+    else
+        printf "Copying missing files from \"./data/\" to \".\"...\n\n"
+
+        rsync -avAHX --ignore-existing "./data/" "."
     fi
 
-    if [ ! -f "$dest" ]; then
-        printf "Copying \"%s\" to \"%s\"\n" "$src" "$dest"
-        cp "$src" "$dest"
-        printf "\n"
-    fi
+    printf "\nDone.\n\n"
 }
 
 
@@ -64,6 +65,7 @@ function generate_jupyter_password {
 
         mv "$password_base_dir/$password_file" "$dest"
         rm -rf "$password_base_dir"
+
         printf "\n"
     fi
 }
@@ -81,16 +83,17 @@ function generate_tls_certificate {
 
 
 # bootstrap
-copy_setting "settings.sh" .
+printf "\n"
+copy_settings
+
 source "./settings.sh"
-mkdir -p "./include"
+printf "\n"
 
 
 # build Docker base image
 printf "Building base image...\n\n"
 
 docker build \
-       --pull \
        --file="./Dockerfile.base" \
        --tag "$docker_base_image" \
        --build-arg=base_image="$anaconda_distribution" \
@@ -98,13 +101,13 @@ docker build \
        --build-arg=uid="$uid" \
        --build-arg=home="$docker_home" \
        --build-arg=jupyter_port=$jupyter_port \
+       --pull \
        .
 
 printf "\nDone.\n\n\n"
 
 
 # create Jupyter Lab configuration
-copy_setting "jupyter_notebook_config.py" "./include"
 generate_jupyter_password
 generate_tls_certificate "$jupyter_cert_file"
 
@@ -123,4 +126,4 @@ docker build \
        "$@" \
        .
 
-printf "\nDone.\n"
+printf "\nDone.\n\n"
