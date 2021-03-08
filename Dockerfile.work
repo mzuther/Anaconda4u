@@ -45,6 +45,6 @@ WORKDIR $home
 COPY --chown=$user ./include/* $home/.include/
 
 # allow storage of Jupyter settings by linking to shared volume
-RUN ln -s $home/shared/.jupyter $home
+RUN ln -s $home/Documents/.jupyter $home
 
 EXPOSE $jupyter_port

@@ -37,8 +37,8 @@ export docker_tag_base="anaconda4u.base:latest"
 export docker_tag_work="anaconda4u.work:latest"
 
 export docker_home="/home/$username"
-export shared_local="$HOME/Documents/data_science/anaconda4u/shared"
-export shared_docker="$docker_home/shared"
+export docker_volume_host="$HOME/Documents/data_science/anaconda4u/Documents"
+export docker_volume_container="$docker_home/Documents"
 
 export jupyter_port=8888
 export jupyter_cert_file="./include/jupyter.pem"

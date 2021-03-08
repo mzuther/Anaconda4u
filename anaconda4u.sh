@@ -29,12 +29,12 @@
 source "./settings.sh"
 
 # ensure that symlink in image points to an existing directory
-mkdir -p "$shared_local/.jupyter"
+mkdir -p "$docker_volume_host/.jupyter"
 
 # run Docker container
 docker run \
        --tty --interactive \
        --publish $jupyter_port:$jupyter_port \
-       --mount type=bind,source="$shared_local",target="$shared_docker" \
+       --mount type=bind,source="$docker_volume_host",target="$docker_volume_container" \
        "$docker_tag_work" \
        "$@"

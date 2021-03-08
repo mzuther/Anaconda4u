@@ -59,9 +59,9 @@ function generate_jupyter_password {
         docker run \
                --tty --interactive \
                --publish $jupyter_port:$jupyter_port \
-               --mount type=bind,source="$password_base_dir",target="$shared_docker" \
+               --mount type=bind,source="$password_base_dir",target="$docker_volume_container" \
                "$docker_tag_base" \
-               /bin/bash -c "/opt/conda/bin/jupyter notebook password --config=$shared_docker/$password_file"
+               /bin/bash -c "/opt/conda/bin/jupyter notebook password --config=$docker_volume_container/$password_file"
 
         mv "$password_base_dir/$password_file" "$dest"
         rm -rf "$password_base_dir"
