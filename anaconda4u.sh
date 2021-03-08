@@ -36,5 +36,5 @@ docker run \
        --tty --interactive \
        --publish $jupyter_port:$jupyter_port \
        --mount type=bind,source="$shared_local",target="$shared_docker" \
-       "$docker_image" \
+       "$docker_tag_work" \
        "$@"

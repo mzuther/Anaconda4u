@@ -32,13 +32,13 @@ export username
 uid=$(id -u)
 export uid
 
-export anaconda_distribution="continuumio/anaconda3"
-export docker_base_image="anaconda4u.base:latest"
-export docker_image="anaconda4u:latest"
+export docker_tag_anaconda="continuumio/anaconda3"
+export docker_tag_base="anaconda4u.base:latest"
+export docker_tag_work="anaconda4u.work:latest"
+
 export docker_home="/home/$username"
+export shared_local="$HOME/Documents/data_science/anaconda4u/shared"
+export shared_docker="$docker_home/shared"
 
 export jupyter_port=8888
 export jupyter_cert_file="./include/jupyter.pem"
-
-export shared_local="$HOME/Documents/data_science/anaconda4u/shared"
-export shared_docker="$docker_home/shared"

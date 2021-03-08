@@ -60,7 +60,7 @@ function generate_jupyter_password {
                --tty --interactive \
                --publish $jupyter_port:$jupyter_port \
                --mount type=bind,source="$password_base_dir",target="$shared_docker" \
-               "$docker_base_image" \
+               "$docker_tag_base" \
                /bin/bash -c "/opt/conda/bin/jupyter notebook password --config=$shared_docker/$password_file"
 
         mv "$password_base_dir/$password_file" "$dest"
@@ -85,18 +85,15 @@ function generate_tls_certificate {
 # bootstrap
 printf "\n"
 copy_settings
-
 source "./settings.sh"
+
 printf "\n"
-
-
-# build Docker base image
 printf "Building base image...\n\n"
 
 docker build \
        --file="./Dockerfile.base" \
-       --tag "$docker_base_image" \
-       --build-arg=base_image="$anaconda_distribution" \
+       --tag "$docker_tag_base" \
+       --build-arg=base_image="$docker_tag_anaconda" \
        --build-arg=user="$username" \
        --build-arg=uid="$uid" \
        --build-arg=home="$docker_home" \
@@ -111,14 +108,12 @@ printf "\nDone.\n\n\n"
 generate_jupyter_password
 generate_tls_certificate "$jupyter_cert_file"
 
-
-# build Docker worker image
-printf "Building worker image...\n\n"
+printf "Building work image...\n\n"
 
 docker build \
-       --file="./Dockerfile" \
-       --tag "$docker_image" \
-       --build-arg=base_image="$docker_base_image" \
+       --file="./Dockerfile.work" \
+       --tag "$docker_tag_work" \
+       --build-arg=base_image="$docker_tag_base" \
        --build-arg=user="$username" \
        --build-arg=uid="$uid" \
        --build-arg=home="$docker_home" \
