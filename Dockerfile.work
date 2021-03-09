@@ -35,6 +35,8 @@ ARG jupyter_port
 # run as root
 USER root
 RUN mamba update --all --yes
+RUN mamba install --yes -c conda-forge jupytext
+
 RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
 
