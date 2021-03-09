@@ -45,32 +45,6 @@ function copy_settings {
 }
 
 
-function generate_jupyter_password {
-    password_file="jupyter_notebook_config.json"
-    dest="include/$password_file"
-
-    if [ ! -f "$dest" ]; then
-        printf "Please enter a password for Jupyter Lab:\n"
-
-        password_base_dir="$(realpath ./password_creation)"
-        mkdir -p "$password_base_dir"
-
-        # run Docker container to create password
-        docker run \
-               --tty --interactive \
-               --publish $jupyter_port:$jupyter_port \
-               --mount type=bind,source="$password_base_dir",target="$docker_volume_container" \
-               "$docker_tag_base" \
-               /bin/bash -c "/opt/conda/bin/jupyter notebook password --config=$docker_volume_container/$password_file"
-
-        mv "$password_base_dir/$password_file" "$dest"
-        rm -rf "$password_base_dir"
-
-        printf "\n"
-    fi
-}
-
-
 function generate_tls_certificate {
     dest="$1"
 
@@ -105,7 +79,6 @@ printf "\nDone.\n\n\n"
 
 
 # create Jupyter Lab configuration
-generate_jupyter_password
 generate_tls_certificate "$jupyter_cert_file"
 
 printf "Building work image...\n\n"
