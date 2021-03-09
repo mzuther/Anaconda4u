@@ -51,3 +51,4 @@ RUN ln -sf $home/.include/.bashrc $home
 RUN ln -sf $home/Documents/.jupyter $home
 
 EXPOSE $jupyter_port
+CMD /opt/conda/bin/jupyter-lab --config=.include/jupyter_notebook_config.py
