@@ -33,7 +33,7 @@ mkdir -p "$docker_volume_host/.jupyter"
 
 # run Docker container
 docker run \
-       --tty --interactive \
+       --tty --interactive --init \
        --publish $jupyter_port:$jupyter_port \
        --env=DISPLAY \
        --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" \
