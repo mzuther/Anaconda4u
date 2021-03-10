@@ -30,7 +30,7 @@ source "./settings.sh"
 
 # open browser (might require a reload if Docker starts VERY slowly)
 (curl --silent --retry 30 --retry-delay 1 --retry-connrefused --insecure \
-       https://127.0.0.1:$jupyter_port/ && \
+       https://127.0.0.1:$jupyter_port/ ; \
      xdg-open https://127.0.0.1:$jupyter_port/) &
 
 # run Jupyter Lab
