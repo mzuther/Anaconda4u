@@ -34,9 +34,15 @@ ARG jupyter_port
 
 # run as root
 USER root
+
 # speed up solving of conda environment
 RUN conda install mamba -n base -c conda-forge
+
+# force installation of JupyterLab v3
 RUN mamba install --yes -c conda-forge jupyterlab=3
+
+# support paired notebooks
+RUN mamba install --yes -c conda-forge jupytext
 
 # run commands as non-root with a dedicated home directory
 RUN adduser --disabled-password --gecos GECOS --home $home --uid $uid $user

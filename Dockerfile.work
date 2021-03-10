@@ -35,8 +35,6 @@ ARG jupyter_port
 # run as root
 USER root
 RUN mamba update --all --yes
-RUN mamba install --yes -c conda-forge jupytext
-
 RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
 
@@ -47,13 +45,13 @@ WORKDIR $home
 # copy user settings ("--chown" ensures that copies are owned by user)
 COPY --chown=$user ./include/* $home/.include/
 
-# change .bashrc from outside
+# link to customized .bashrc
 RUN ln -sf $home/.include/.bashrc $home
 
 # allow storage of Jupyter settings by linking to shared volume
-RUN ln -sf $home/Documents/.jupyter $home
 RUN mkdir -p $home/.local/share
 RUN ln -sf $home/Documents/.local/share/jupyter $home/.local/share
+RUN ln -sf $home/Documents/.jupyter $home
 
 EXPOSE $jupyter_port
 CMD /opt/conda/bin/jupyter-lab --config=.include/jupyter_lab_config.py
