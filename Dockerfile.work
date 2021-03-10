@@ -38,12 +38,16 @@ RUN mamba update --all --yes
 RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
 
+# copy user settings ("--chown" ensures that copies are owned by user)
+COPY --chown=$user ./include/* $home/.include/
+
+# override default values of extension settings
+RUN mkdir -p /opt/conda/share/jupyter/lab/settings
+RUN cp ./.include/overrides.json /opt/conda/share/jupyter/lab/settings
+
 # switch to new user
 USER $user
 WORKDIR $home
-
-# copy user settings ("--chown" ensures that copies are owned by user)
-COPY --chown=$user ./include/* $home/.include/
 
 # link to customized .bashrc
 RUN ln -sf $home/.include/.bashrc $home
