@@ -41,6 +41,9 @@ RUN conda install mamba -n base -c conda-forge
 # force installation of JupyterLab v3
 RUN mamba install --yes -c conda-forge jupyterlab=3
 
+# allow customizing JupyterLab
+RUN mamba install --yes -c conda-forge nodejs
+
 # support paired notebooks
 RUN mamba install --yes -c conda-forge jupytext
 
