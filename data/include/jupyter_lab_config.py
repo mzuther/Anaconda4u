@@ -349,6 +349,7 @@
 ## Whether to open in a browser after starting.
 #  See also: ExtensionApp.open_browser
 # c.LabApp.open_browser = True
+c.LabApp.open_browser = False
 
 ## The override url for static lab assets, typically a CDN.
 #  Default: ''
