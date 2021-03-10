@@ -28,8 +28,9 @@
 
 source "./settings.sh"
 
-# ensure that symlink in image points to an existing directory
+# ensure that symlinks in image point to an existing directory
 mkdir -p "$docker_volume_host/.jupyter"
+mkdir -p "$docker_volume_host/.local/share/jupyter"
 
 # run Docker container
 docker run \

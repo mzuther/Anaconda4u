@@ -52,6 +52,8 @@ RUN ln -sf $home/.include/.bashrc $home
 
 # allow storage of Jupyter settings by linking to shared volume
 RUN ln -sf $home/Documents/.jupyter $home
+RUN mkdir -p $home/.local/share
+RUN ln -sf $home/Documents/.local/share/jupyter $home/.local/share
 
 EXPOSE $jupyter_port
 CMD /opt/conda/bin/jupyter-lab --config=.include/jupyter_lab_config.py
