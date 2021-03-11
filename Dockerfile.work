@@ -53,7 +53,10 @@ WORKDIR $home
 RUN ln -sf $home/.include/.bashrc $home
 
 # allow storage of Jupyter settings by linking to shared volume
+RUN mkdir -p $home/.config
 RUN mkdir -p $home/.local/share
+
+RUN ln -sf $home/Documents/.config/ranger $home/.config
 RUN ln -sf $home/Documents/.local/share/jupyter $home/.local/share
 RUN ln -sf $home/Documents/.jupyter $home
 
