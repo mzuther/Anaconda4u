@@ -38,6 +38,8 @@ RUN mamba update --all --yes
 RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
 
+RUN pip install jupyterlab_theme_solarized_dark
+
 # copy user settings ("--chown" ensures that copies are owned by user)
 COPY --chown=$user ./include/* $home/.include/
 
