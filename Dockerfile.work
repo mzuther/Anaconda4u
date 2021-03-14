@@ -52,6 +52,9 @@ WORKDIR $home
 # link to customized .bashrc
 RUN ln -sf $home/.include/.bashrc $home
 
+# use Bash in terminal sessions
+ENV SHELL=/bin/bash
+
 # allow storage of Jupyter settings by linking to shared volume
 RUN mkdir -p $home/.config
 RUN mkdir -p $home/.local/share
