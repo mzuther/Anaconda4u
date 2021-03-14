@@ -1,0 +1,25 @@
+{
+  "shortcuts": [
+    {
+      "command": "notebook:move-cell-up",
+      "keys": [
+        "Alt Shift ArrowUp"
+      ],
+      "selector": ".jp-Notebook:focus"
+    },
+    {
+      "command": "notebook:move-cell-down",
+      "keys": [
+        "Alt Shift ArrowDown"
+      ],
+      "selector": ".jp-Notebook:focus"
+    },
+    {
+      "command": "docmanager:reload",
+      "keys": [
+        "Shift R"
+      ],
+      "selector": "body"
+    }
+  ]
+}
