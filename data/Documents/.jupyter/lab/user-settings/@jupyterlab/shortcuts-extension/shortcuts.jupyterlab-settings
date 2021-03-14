@@ -1,6 +1,20 @@
 {
   "shortcuts": [
     {
+      "command": "application:activate-next-tab",
+      "keys": [
+        "Alt Shift Tab"
+      ],
+      "selector": "body"
+    },
+    {
+      "command": "application:activate-next-tab-bar",
+      "keys": [
+        "Alt Tab"
+      ],
+      "selector": "body"
+    },
+    {
       "command": "notebook:move-cell-up",
       "keys": [
         "Alt Shift ArrowUp"
@@ -15,11 +29,18 @@
       "selector": ".jp-Notebook:focus"
     },
     {
+      "command": "notebook:paste-cell-above",
+      "keys": [
+        "Shift V"
+      ],
+      "selector": ".jp-Notebook:focus"
+    },
+    {
       "command": "docmanager:reload",
       "keys": [
         "Shift R"
       ],
-      "selector": "body"
+      "selector": ".jp-Notebook:focus"
     }
   ]
 }
