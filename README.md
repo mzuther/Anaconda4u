@@ -34,17 +34,48 @@ Snail).
 
 **Anaconda4u** "publishes" the container's ports to the host and uses
 a self-generated TLS certificate for encryption.  It comes with a
-shared folder (sub-folder `Documents`) and I created a few symlinks to
+shared folder (sub-folder `Documents/`) and I created a few symlinks to
 make JupyterLab's settings persistent.
 
 ### Better defaults
 
 **Anaconda4u** comes with a few defaults that you can either keep or
-customise.  A few (in the directory `include`) will be "burned" to the
+customise.  A few (in the folder `include/`) will be "burned" to the
 image for security reasons.
 
 Terminal sessions will run in Bash (with a customised `.bashrc`) and I
 have included the console file manager `ranger` for ease of use.
+
+## Instructions
+
+1. install the dependencies: `apt-get install docker.io rsync
+   xdg-utils` (Debian)
+1. customise the settings in folder `data/` (optional)
+1. run `./build.sh` to create the base and work images
+1. use `./anaconda4u.sh` run a new container and execute commands:
+   `./anaconda4u.sh bash` logs you into a Bash shell and
+   `./anaconda4u.sh ranger` starts a file manager in your home
+   directory
+1. run `./jupyter-lab.sh` to run a new container, start JupyterLab and
+   open your favourite browser (via `xdg-open`)
+
+The scripts `./build.sh` and `./build-dev.sh` accept arguments that
+are passed on to `docker-build` of the work image.  So in order to
+build the work image from scratch, run `./build.sh --no-cache`.
+
+## Updates
+
+Periodically running `./build.sh` will automatically create a new base
+image in case the official Anaconda images have been updated.  Also,
+any new settings files I may have added will be copied to your system.
+
+Existing settings files will not be overwritten.  Please run
+   `./build-dev.sh` to **overwrite customised settings** in the image
+   with those in the `data/` folder.
+
+I recommend that you can create a Git branch with your settings and
+then merge updates to this repository into it.  This way, your
+settings should be quite safe from being changed by accident.
 
 ## Contributors
 
