@@ -2,11 +2,49 @@
 
 *Build your own Anaconda container easily.*
 
-**Anaconda4u** can be used to create and customize your own
-[Anaconda][] container for Docker.
+## Motivation
 
-I'm currently getting acquainted with Docker and just playing around,
-so there is no documentation yet.
+I have a few issues with the Anaconda distribution and its official
+Docker images.  So I built what perceive to be an improved image and
+want to share it here.  The image should be very easy to extend and
+adapt to your needs.
+
+### The "root" of the problem
+
+Currently, Anaconda's Docker images only have a root user.  I don't
+even want to start how bad this is.  Even if you're fine with the
+implications, as soon as you write files within the container and want
+to edit them on the host system, you'll be in trouble.
+
+**Anaconda4u** creates a non-root user with a dedicated home
+directory.
+
+### Package managers
+
+I have used at least a dozen package managers over the years.  After a
+while, most of them started misbehaving: think dependency hell,
+unclean removals, etc.
+
+**Anaconda4u** makes it easy to re-install everything from scratch.
+This should also be relatively fast, as the base image remains
+untouched and you can use `mamba` instead of `conda` (a.k.a. The
+Snail).
+
+### Communication
+
+**Anaconda4u** "publishes" the container's ports to the host and uses
+a self-generated TLS certificate for encryption.  It comes with a
+shared folder (sub-folder `Documents`) and I created a few symlinks to
+make JupyterLab's settings persistent.
+
+### Better defaults
+
+**Anaconda4u** comes with a few defaults that you can either keep or
+customise.  A few (in the directory `include`) will be "burned" to the
+image for security reasons.
+
+Terminal sessions will run in Bash (with a customised `.bashrc`) and I
+have included the console file manager `ranger` for ease of use.
 
 ## Contributors
 
