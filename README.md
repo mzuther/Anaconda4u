@@ -30,12 +30,28 @@ This should also be relatively fast, as the base image remains
 untouched and you can use `mamba` instead of `conda` (a.k.a. The
 Snail).
 
+### Reproducibility
+
+I regularly re-build the work image from scratch by executing
+`./build.sh --no-cache`.  This adds *two* tags to the image:
+`anaconda4u.work:latest` and `anaconda4u.work:2021-03` (using the
+current year and month).
+
+So when an update introduces a bug or you want to re-visit an old
+project, all you have to do is open your editor, change a single line
+and get back to work!  Simply open `./anaconda4u.sh` and change
+`anaconda4u.work:latest` to the working image of your choice.
+
 ### Communication
 
 **Anaconda4u** "publishes" the container's ports to the host and uses
 a self-generated TLS certificate for encryption.  It comes with a
 shared folder (sub-folder `Documents/`) and I created a few symlinks to
-make JupyterLab's settings persistent.
+make JupyterLab's settings persistent and editable from the outside.
+
+In addition, your `DISPLAY` environment variable is mirrored in the
+container.  Thus, you can run GUI applications in the container and
+their UI will open in your current X session.
 
 ### Better defaults
 
