@@ -86,6 +86,7 @@ printf "Building work image...\n\n"
 docker build \
        --file="./Dockerfile.work" \
        --tag "$docker_tag_work" \
+       --tag "$docker_tag_work_unique" \
        --build-arg=base_image="$docker_tag_base" \
        --build-arg=user="$username" \
        --build-arg=uid="$uid" \
