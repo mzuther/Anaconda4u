@@ -35,4 +35,4 @@ source "./settings.sh"
  xdg-open https://127.0.0.1:$jupyter_port/) &
 
 # run Jupyter Lab
-./anaconda4u.sh
+./anaconda4u.sh ""
