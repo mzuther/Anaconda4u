@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #  ----------------------------------------------------------------------------
 #
 #  Anaconda4u
@@ -26,24 +24,36 @@
 #  ----------------------------------------------------------------------------
 
 
-username=$(id -un)
-export username
+ARG base_image
+FROM $base_image
 
-uid=$(id -u)
-export uid
+ARG user
+ARG uid
+ARG home
+ARG jupyter_port
 
-export docker_tag_anaconda="continuumio/anaconda3"
-export docker_tag_custom="anaconda4u"
+# run as root
+USER root
+RUN mamba update --all --yes
 
-export docker_tag_base="$docker_tag_custom.base:latest"
-export docker_tag_intermediate="$docker_tag_custom.intermediate:latest"
-export docker_tag_work="$docker_tag_custom.work:latest"
-docker_tag_work_unique="$docker_tag_custom.work:$(date +%Y-%m)"
-export docker_tag_work_unique
+RUN jupyter labextension install jupyterlab-theme-solarized-dark
 
-export docker_home="/home/$username"
-export docker_volume_host="$HOME/Documents/data_science/anaconda4u/Documents"
-export docker_volume_container="$docker_home/Documents"
+# switch to new user
+USER $user
+WORKDIR $home
 
-export jupyter_port=8888
-export jupyter_cert_file="./include/jupyter.pem"
+# link to customized .bashrc
+RUN ln -sf $home/.include/.bashrc $home
+
+# use Bash in terminal sessions
+ENV SHELL=/bin/bash
+
+# allow storage of Jupyter settings by linking to shared volume
+RUN mkdir -p $home/.config
+RUN mkdir -p $home/.local/share
+
+RUN ln -sf $home/Documents/.config/ranger $home/.config
+RUN ln -sf $home/Documents/.local/share/jupyter $home/.local/share
+RUN ln -sf $home/Documents/.jupyter $home
+
+EXPOSE $jupyter_port

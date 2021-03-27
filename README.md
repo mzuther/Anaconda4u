@@ -14,7 +14,7 @@ adapt to your needs.
 Currently, Anaconda's Docker images only have a root user.  I don't
 even want to start how bad this is.  Even if you're fine with the
 implications, as soon as you write files within the container and want
-to edit them on the host system, you'll be in trouble.
+to edit them on the host system, you are in trouble.
 
 **Anaconda4u** creates a non-root user with a dedicated home
 directory.
@@ -22,8 +22,8 @@ directory.
 ### Package managers
 
 I have used at least a dozen package managers over the years.  After a
-while, most of them started misbehaving: think dependency hell,
-unclean removals, etc.
+while, most of them started misbehaving: dependency hell, unclean
+removals, and so on.
 
 **Anaconda4u** makes it easy to re-install everything from scratch.
 This should also be relatively fast, as the base image remains
@@ -33,7 +33,7 @@ Snail).
 ### Reproducibility
 
 I regularly re-build the work image from scratch by executing
-`./build.sh --no-cache`.  This adds *two* tags to the image:
+`./build.sh --no-cache`.  Work images are labelled with *two* tags:
 `anaconda4u.work:latest` and `anaconda4u.work:2021-03` (using the
 current year and month).
 
@@ -44,14 +44,15 @@ and get back to work!  Simply open `./anaconda4u.sh` and change
 
 ### Communication
 
-**Anaconda4u** "publishes" the container's ports to the host and uses
-a self-generated TLS certificate for encryption.  It comes with a
-shared folder (sub-folder `Documents/`) and I created a few symlinks to
-make JupyterLab's settings persistent and editable from the outside.
+**Anaconda4u** "publishes" a container's JupyterLab port to the host
+and uses a self-generated TLS certificate for encryption.  It comes
+with a shared folder (sub-folder `Documents/`) and I created a few
+symlinks to make JupyterLab's settings persistent and editable from
+the outside.
 
 In addition, your `DISPLAY` environment variable is mirrored in the
-container.  Thus, you can run GUI applications in the container and
-their UI will open in your current X session.
+container.  Thus, you can run (most) GUI applications in the container
+and their UI will open in your current X session.
 
 ### Better defaults
 
@@ -64,28 +65,28 @@ have included the console file manager `ranger` for ease of use.
 
 ## Instructions
 
-1. install the dependencies: `apt-get install docker.io rsync
-   xdg-utils` (Debian)
+1. install the dependencies (Debian): `apt-get install bash curl
+   docker.io openssl rsync xdg-utils`
 1. customise the settings in folder `data/` (optional)
-1. run `./build.sh` to create the base and work images
+1. run `./build.sh` to create base, intermediate and work images
 1. use `./anaconda4u.sh` run a new container and execute commands:
-   `./anaconda4u.sh bash` logs you into a Bash shell and
-   `./anaconda4u.sh ranger` starts a file manager in your home
-   directory
+   `./anaconda4u.sh` logs you into a Bash shell and `./anaconda4u.sh
+   ranger` starts a file manager in your home directory
 1. run `./jupyter-lab.sh` to run a new container, start JupyterLab and
    open your favourite browser (via `xdg-open`)
 
 The scripts `./build.sh` and `./build-dev.sh` accept arguments that
-are passed on to `docker-build` of the work image.  So in order to
-build the work image from scratch, run `./build.sh --no-cache`.
+are passed on to `docker-build` of the intermediate and work images.
+So in order to build these images from scratch, run `./build.sh
+--no-cache`.
 
 ## Updates
 
-Periodically running `./build.sh` will automatically create a new base
-image in case the official Anaconda images have been updated.  Also,
-any new settings files I may have added will be copied to your system.
+When official Anaconda images are updated, run `./build.sh` to create
+new base, intermediate and work images.  Also, any new settings files
+I have added will be copied to your system.
 
-Existing settings files will not be overwritten.  Please run
+Existing settings files will *not* be overwritten.  Please run
    `./build-dev.sh` to **overwrite customised settings** in the image
    with those in the `data/` folder.
 

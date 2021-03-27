@@ -34,15 +34,12 @@ ARG jupyter_port
 
 # run as root
 USER root
-RUN mamba update --all --yes
 
 # Python kernel with support for Jupyter debugging
 RUN mamba install --yes --channel conda-forge xeus-python
 
 RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
-
-RUN pip install jupyterlab_theme_solarized_dark
 
 # copy user settings ("--chown" ensures that copies are owned by user)
 COPY --chown=$user ./include/* $home/.include/
@@ -54,20 +51,6 @@ RUN cp ./.include/overrides.json /opt/conda/share/jupyter/lab/settings
 # switch to new user
 USER $user
 WORKDIR $home
-
-# link to customized .bashrc
-RUN ln -sf $home/.include/.bashrc $home
-
-# use Bash in terminal sessions
-ENV SHELL=/bin/bash
-
-# allow storage of Jupyter settings by linking to shared volume
-RUN mkdir -p $home/.config
-RUN mkdir -p $home/.local/share
-
-RUN ln -sf $home/Documents/.config/ranger $home/.config
-RUN ln -sf $home/Documents/.local/share/jupyter $home/.local/share
-RUN ln -sf $home/Documents/.jupyter $home
 
 EXPOSE $jupyter_port
 CMD /opt/conda/bin/jupyter-lab --config=.include/jupyter_lab_config.py
