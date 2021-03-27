@@ -34,6 +34,12 @@ ARG jupyter_port
 
 # run as root
 USER root
+
+# facilitate installation of R packages
+RUN apt-get --assume-yes update
+RUN apt-get --assume-yes install build-essential
+RUN apt-get --assume-yes clean
+
 RUN mamba update --all --yes
 
 RUN jupyter labextension install jupyterlab-theme-solarized-dark

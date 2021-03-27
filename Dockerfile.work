@@ -41,6 +41,11 @@ RUN mamba install --yes --channel conda-forge xeus-python
 RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
 
+RUN mamba install --yes --channel conda-forge r-tidyverse
+RUN mamba install --yes --channel conda-forge r-tidymodels
+
+RUN Rscript -e 'install.packages("wrapr", repos="https://cloud.r-project.org/", dependencies=TRUE)'
+
 # copy user settings ("--chown" ensures that copies are owned by user)
 COPY --chown=$user ./include/* $home/.include/
 

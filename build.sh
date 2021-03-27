@@ -76,8 +76,6 @@ docker build \
        .
 
 printf "\nDone.\n\n\n"
-
-
 printf "Building intermediate image...\n\n"
 
 docker build \
@@ -94,7 +92,8 @@ docker build \
 # create Jupyter Lab configuration
 generate_tls_certificate "$jupyter_cert_file"
 
-printf "\nBuilding work image...\n\n"
+printf "\nDone.\n\n\n"
+printf "Building work image...\n\n"
 
 docker build \
        --file="./Dockerfile.work" \
