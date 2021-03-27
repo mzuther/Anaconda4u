@@ -33,6 +33,9 @@ mkdir -p "$docker_volume_host/.config/ranger"
 mkdir -p "$docker_volume_host/.local/share/jupyter"
 mkdir -p "$docker_volume_host/.jupyter"
 
+# run Bash shell in case no arguments have been specified
+arguments=${@-bash}
+
 # run Docker container
 docker run \
        --tty --interactive --init \
@@ -41,4 +44,4 @@ docker run \
        --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" \
        --mount type=bind,source="$docker_volume_host",target="$docker_volume_container" \
        "$docker_tag_work" \
-       "$@"
+       $arguments
