@@ -38,6 +38,9 @@ USER root
 # facilitate installation of R packages
 RUN apt-get --assume-yes update
 RUN apt-get --assume-yes install build-essential
+
+# install X11 libraries and a few tools
+RUN apt-get --assume-yes install x11-utils
 RUN apt-get --assume-yes clean
 
 RUN mamba update --all --yes
