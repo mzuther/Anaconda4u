@@ -42,8 +42,8 @@ printf "\nBuilding PDSwR2 image...\n\n"
 
 docker build \
        --file="./Dockerfile" \
-       --tag "$docker_tag_custom.pdswr2:latest" \
-       --build-arg=base_image="$docker_tag_work" \
+       --tag "$docker_tag.pdswr2" \
+       --build-arg=base_image="$docker_tag.work" \
        --build-arg=user="$username" \
        --build-arg=uid="$uid" \
        --build-arg=home="$docker_home" \

@@ -32,14 +32,8 @@ export username
 uid=$(id -u)
 export uid
 
-export docker_tag_anaconda="continuumio/anaconda3"
-export docker_tag_custom="anaconda4u"
-
-export docker_tag_base="$docker_tag_custom.base:latest"
-export docker_tag_intermediate="$docker_tag_custom.intermediate:latest"
-export docker_tag_work="$docker_tag_custom.work:latest"
-docker_tag_work_unique="$docker_tag_custom.work:$(date +%Y-%m)"
-export docker_tag_work_unique
+export docker_tag_original="continuumio/anaconda3"
+export docker_tag="anaconda4u"
 
 export docker_home="/home/$username"
 export docker_volume_host="$HOME/Documents/data_science/anaconda4u/Documents"

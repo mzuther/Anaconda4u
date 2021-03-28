@@ -66,8 +66,8 @@ printf "Building base image...\n\n"
 
 docker build \
        --file="./Dockerfile.base" \
-       --tag "$docker_tag_base" \
-       --build-arg=base_image="$docker_tag_anaconda" \
+       --tag "$docker_tag.base" \
+       --build-arg=base_image="$docker_tag_original" \
        --build-arg=user="$username" \
        --build-arg=uid="$uid" \
        --build-arg=home="$docker_home" \
@@ -80,8 +80,8 @@ printf "Building intermediate image...\n\n"
 
 docker build \
        --file="./Dockerfile.intermediate" \
-       --tag "$docker_tag_intermediate" \
-       --build-arg=base_image="$docker_tag_base" \
+       --tag "$docker_tag.intermediate" \
+       --build-arg=base_image="$docker_tag.base" \
        --build-arg=user="$username" \
        --build-arg=uid="$uid" \
        --build-arg=home="$docker_home" \
@@ -97,9 +97,9 @@ printf "Building work image...\n\n"
 
 docker build \
        --file="./Dockerfile.work" \
-       --tag "$docker_tag_work" \
-       --tag "$docker_tag_work_unique" \
-       --build-arg=base_image="$docker_tag_intermediate" \
+       --tag "$docker_tag.work:latest" \
+       --tag "$docker_tag.work:$(date +%Y-%m)" \
+       --build-arg=base_image="$docker_tag.intermediate" \
        --build-arg=user="$username" \
        --build-arg=uid="$uid" \
        --build-arg=home="$docker_home" \

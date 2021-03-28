@@ -43,5 +43,5 @@ docker run \
        --env=DISPLAY \
        --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" \
        --mount type=bind,source="$docker_volume_host",target="$docker_volume_container" \
-       "$docker_tag_work" \
+       "$docker_tag.work:latest" \
        $arguments
