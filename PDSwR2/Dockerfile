@@ -35,17 +35,20 @@ ARG jupyter_port
 # run as root
 USER root
 
+RUN mamba install --yes --channel conda-forge r-arules r-bitops \
+    r-catools r-dbi r-dbplyr r-diagrammer r-dplyr r-e1071 r-fpc \
+    r-ggplot2 r-glmnet r-glmnetutils r-gridextra r-hexbin r-kernlab \
+    r-igraph r-knitr r-lime r-lubridate r-magrittr r-mass r-mgcv \
+    r-pander r-plotly r-pwr r-randomforest r-readr r-readxl \
+    r-rmarkdown r-rpart r-rpart.plot r-rpostgres r-rsqlite r-scales \
+    r-sqldf r-tidypredict r-text2vec r-tidyr r-xgboost r-xts \
+    r-webshot r-zeallot r-zoo
+
+
 # try to use as many CPUs as possible when using "make"
 RUN Rscript -e "install.packages(c( \
-      'arules', 'bitops', 'caTools', 'cdata', 'data.table', 'DBI', \
-      'dbplyr', 'DiagrammeR', 'dplyr', 'e1071', 'fpc', 'ggplot2', \
-      'glmnet', 'glmnetUtils', 'gridExtra', 'hexbin', 'kernlab', \
-      'igraph', 'knitr', 'lime', 'lubridate', 'magrittr', 'MASS', \
-      'mgcv', 'pander', 'plotly', 'pwr', 'randomForest', 'readr', \
-      'readxl', 'rmarkdown', 'rpart', 'rpart.plot', 'RPostgres', \
-      'rqdatatable', 'rquery', 'RSQLite', 'scales', 'sigr', 'sqldf', \
-      'tidypredict', 'text2vec', 'tidyr', 'vtreat', 'wrapr', 'WVPlots', \
-      'xgboost', 'xts', 'webshot', 'zeallot', 'zoo'), \
+      'cdata', 'data.table', 'rqdatatable', 'rquery', 'sigr', \
+      'vtreat', 'wrapr', 'WVPlots'), \
     repos = 'https://cloud.r-project.org/', \
     dependencies = c('Depends', 'Imports', 'LinkingTo'), \
     Ncpus = $(nproc))"

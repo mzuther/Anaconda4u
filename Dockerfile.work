@@ -43,6 +43,7 @@ RUN mamba install --yes --channel conda-forge xgboost
 
 RUN mamba install --yes --channel conda-forge r-tidyverse
 RUN mamba install --yes --channel conda-forge r-tidymodels
+RUN mamba install --yes --channel conda-forge r-ggpubr
 
 RUN Rscript -e 'install.packages("wrapr", repos="https://cloud.r-project.org/", dependencies=TRUE)'
 
