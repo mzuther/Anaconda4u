@@ -41,7 +41,7 @@ RUN mamba install --yes --channel conda-forge xeus-python
 RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
 
-RUN mamba install --yes --channel conda-forge r-tidyverse
+RUN mamba install --yes --channel conda-forge r-base r-essentials
 RUN mamba install --yes --channel conda-forge r-tidymodels
 RUN mamba install --yes --channel conda-forge r-ggpubr
 
