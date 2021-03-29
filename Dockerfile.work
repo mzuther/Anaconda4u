@@ -35,14 +35,13 @@ ARG jupyter_port
 # run as root
 USER root
 
-# Python kernel with support for Jupyter debugging
+# xeus: Python kernel with support for Jupyter debugging
 RUN mamba install --yes --channel conda-forge xeus-python
-
-RUN mamba install --yes --channel conda-forge scikit-learn
 RUN mamba install --yes --channel conda-forge xgboost
 
 RUN mamba install --yes --channel conda-forge r-base r-essentials
 RUN mamba install --yes --channel conda-forge r-tidymodels
+RUN mamba install --yes --channel conda-forge r-xgboost
 RUN mamba install --yes --channel conda-forge r-ggpubr
 
 RUN Rscript -e 'install.packages("wrapr", repos="https://cloud.r-project.org/", dependencies=TRUE)'
