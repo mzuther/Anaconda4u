@@ -28,13 +28,19 @@
 
 source "./settings.sh"
 
+use_image="$docker_tag.work:latest"
+
+# run Bash shell in case no arguments have been specified
+arguments=${@-bash}
+
+
 # ensure that symlinks in image point to an existing directory
 mkdir -p "$docker_volume_host/.config/ranger"
 mkdir -p "$docker_volume_host/.local/share/jupyter"
 mkdir -p "$docker_volume_host/.jupyter"
 
-# run Bash shell in case no arguments have been specified
-arguments=${@-bash}
+
+printf "\nRunning container \"%s\":\n\n" $use_image
 
 # run Docker container
 docker run \
@@ -43,5 +49,7 @@ docker run \
        --env=DISPLAY \
        --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" \
        --mount type=bind,source="$docker_volume_host",target="$docker_volume_container" \
-       "$docker_tag.work:latest" \
+       "$use_image" \
        $arguments
+
+printf "\n"

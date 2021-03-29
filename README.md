@@ -40,7 +40,7 @@ current year and month).
 So when an update introduces a bug or you want to re-visit an old
 project, all you have to do is open your editor, change a single line
 and get back to work!  Simply open `./anaconda4u.sh` and change
-`anaconda4u.work:latest` to the working image of your choice.
+`use_image` to the working image of your choice.
 
 ### Communication
 
