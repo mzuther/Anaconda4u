@@ -40,7 +40,7 @@ mkdir -p "$docker_volume_host/.local/share/jupyter"
 mkdir -p "$docker_volume_host/.jupyter"
 
 
-printf "\nRunning container \"%s\":\n\n" $use_image
+printf "\nStarting container => \u001b[97m%s\u001b[0m\n\n" $use_image
 
 # run Docker container
 docker run \
