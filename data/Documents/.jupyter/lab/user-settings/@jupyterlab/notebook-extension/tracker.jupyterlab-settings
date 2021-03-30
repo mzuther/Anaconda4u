@@ -1,3 +1,4 @@
 {
-    "kernelShutdown": true
+    "kernelShutdown": true,
+    "scrollPastEnd": false
 }
