@@ -25,7 +25,6 @@
 #
 #  ----------------------------------------------------------------------------
 
-
 function copy_settings {
     mkdir -p "./include"
 
@@ -44,7 +43,6 @@ function copy_settings {
     printf "\nDone.\n\n"
 }
 
-
 function generate_tls_certificate {
     dest="$1"
 
@@ -55,7 +53,6 @@ function generate_tls_certificate {
     fi
 }
 
-
 # bootstrap
 printf "\n"
 copy_settings
@@ -65,29 +62,29 @@ printf "\n"
 printf "Building base image...\n\n"
 
 docker build \
-       --file="./Dockerfile.base" \
-       --tag "$docker_tag.base" \
-       --build-arg=base_image="$docker_tag_original" \
-       --build-arg=user="$username" \
-       --build-arg=uid="$uid" \
-       --build-arg=home="$docker_home" \
-       --build-arg=jupyter_port=$jupyter_port \
-       --pull \
-       .
+    --file="./Dockerfile.base" \
+    --tag "$docker_tag.base" \
+    --build-arg=base_image="$docker_tag_original" \
+    --build-arg=user="$username" \
+    --build-arg=uid="$uid" \
+    --build-arg=home="$docker_home" \
+    --build-arg=jupyter_port=$jupyter_port \
+    --pull \
+    .
 
 printf "\nDone.\n\n\n"
 printf "Building intermediate image...\n\n"
 
 docker build \
-       --file="./Dockerfile.intermediate" \
-       --tag "$docker_tag.intermediate" \
-       --build-arg=base_image="$docker_tag.base" \
-       --build-arg=user="$username" \
-       --build-arg=uid="$uid" \
-       --build-arg=home="$docker_home" \
-       --build-arg=jupyter_port=$jupyter_port \
-       "$@" \
-       .
+    --file="./Dockerfile.intermediate" \
+    --tag "$docker_tag.intermediate" \
+    --build-arg=base_image="$docker_tag.base" \
+    --build-arg=user="$username" \
+    --build-arg=uid="$uid" \
+    --build-arg=home="$docker_home" \
+    --build-arg=jupyter_port=$jupyter_port \
+    "$@" \
+    .
 
 # create Jupyter Lab configuration
 generate_tls_certificate "$jupyter_cert_file"
@@ -96,15 +93,15 @@ printf "\nDone.\n\n\n"
 printf "Building work image...\n\n"
 
 docker build \
-       --file="./Dockerfile.work" \
-       --tag "$docker_tag.work:latest" \
-       --tag "$docker_tag.work:$(date +%Y-%m)" \
-       --build-arg=base_image="$docker_tag.intermediate" \
-       --build-arg=user="$username" \
-       --build-arg=uid="$uid" \
-       --build-arg=home="$docker_home" \
-       --build-arg=jupyter_port=$jupyter_port \
-       "$@" \
-       .
+    --file="./Dockerfile.work" \
+    --tag "$docker_tag.work:latest" \
+    --tag "$docker_tag.work:$(date +%Y-%m)" \
+    --build-arg=base_image="$docker_tag.intermediate" \
+    --build-arg=user="$username" \
+    --build-arg=uid="$uid" \
+    --build-arg=home="$docker_home" \
+    --build-arg=jupyter_port=$jupyter_port \
+    "$@" \
+    .
 
 printf "\nDone.\n\n"

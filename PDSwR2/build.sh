@@ -25,7 +25,6 @@
 #
 #  ----------------------------------------------------------------------------
 
-
 source "../settings.sh"
 
 # clone PDSwR2 files to "Documents" folder
@@ -41,13 +40,13 @@ cd "PDSwR2" || exit
 printf "\nBuilding PDSwR2 image...\n\n"
 
 docker build \
-       --file="./Dockerfile" \
-       --tag "$docker_tag.pdswr2" \
-       --build-arg=base_image="$docker_tag.work" \
-       --build-arg=user="$username" \
-       --build-arg=uid="$uid" \
-       --build-arg=home="$docker_home" \
-       --build-arg=jupyter_port=$jupyter_port \
-       .
+    --file="./Dockerfile" \
+    --tag "$docker_tag.pdswr2" \
+    --build-arg=base_image="$docker_tag.work" \
+    --build-arg=user="$username" \
+    --build-arg=uid="$uid" \
+    --build-arg=home="$docker_home" \
+    --build-arg=jupyter_port=$jupyter_port \
+    .
 
 printf "\nDone.\n\n"

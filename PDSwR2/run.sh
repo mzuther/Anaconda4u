@@ -25,7 +25,6 @@
 #
 #  ----------------------------------------------------------------------------
 
-
 source "../settings.sh"
 
 cd ..
@@ -37,18 +36,20 @@ mkdir -p "$docker_volume_host/.jupyter"
 
 # open browser (might require a reload if Docker starts VERY slowly)
 if [ -z "$1" ]; then
-    (curl --silent --retry 30 --retry-delay 1 --retry-connrefused --insecure \
-          https://127.0.0.1:$jupyter_port/ ; \
-     sleep 2 ; \
-     xdg-open https://127.0.0.1:$jupyter_port/) &
+    (
+        curl --silent --retry 30 --retry-delay 1 --retry-connrefused --insecure \
+            https://127.0.0.1:$jupyter_port/
+        sleep 2
+        xdg-open https://127.0.0.1:$jupyter_port/
+    ) &
 fi
 
 # run Docker container
 docker run \
-       --tty --interactive --init \
-       --publish $jupyter_port:$jupyter_port \
-       --env=DISPLAY \
-       --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" \
-       --mount type=bind,source="$docker_volume_host",target="$docker_volume_container" \
-       "$docker_tag.pdswr2" \
-       $@
+    --tty --interactive --init \
+    --publish $jupyter_port:$jupyter_port \
+    --env=DISPLAY \
+    --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" \
+    --mount type=bind,source="$docker_volume_host",target="$docker_volume_container" \
+    "$docker_tag.pdswr2" \
+    $@

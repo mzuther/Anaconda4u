@@ -25,7 +25,6 @@
 #
 #  ----------------------------------------------------------------------------
 
-
 source "./settings.sh"
 
 use_image="$docker_tag.work:latest"
@@ -33,23 +32,21 @@ use_image="$docker_tag.work:latest"
 # run Bash shell in case no arguments have been specified
 arguments=${@-bash}
 
-
 # ensure that symlinks in image point to an existing directory
 mkdir -p "$docker_volume_host/.config/ranger"
 mkdir -p "$docker_volume_host/.local/share/jupyter"
 mkdir -p "$docker_volume_host/.jupyter"
 
-
 printf "\nStarting container => \u001b[97m%s\u001b[0m\n\n" $use_image
 
 # run Docker container
 docker run \
-       --tty --interactive --init \
-       --publish $jupyter_port:$jupyter_port \
-       --env=DISPLAY \
-       --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" \
-       --mount type=bind,source="$docker_volume_host",target="$docker_volume_container" \
-       "$use_image" \
-       $arguments
+    --tty --interactive --init \
+    --publish $jupyter_port:$jupyter_port \
+    --env=DISPLAY \
+    --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" \
+    --mount type=bind,source="$docker_volume_host",target="$docker_volume_container" \
+    "$use_image" \
+    $arguments
 
 printf "\n"
