@@ -2,44 +2,32 @@
   "shortcuts": [
     {
       "command": "application:activate-next-tab",
-      "keys": [
-        "Alt Shift Tab"
-      ],
+      "keys": ["Alt Shift Tab"],
       "selector": "body"
     },
     {
       "command": "application:activate-next-tab-bar",
-      "keys": [
-        "Alt Tab"
-      ],
+      "keys": ["Alt Tab"],
       "selector": "body"
     },
     {
       "command": "notebook:move-cell-up",
-      "keys": [
-        "Alt Shift ArrowUp"
-      ],
+      "keys": ["Alt Shift ArrowUp"],
       "selector": ".jp-Notebook:focus"
     },
     {
       "command": "notebook:move-cell-down",
-      "keys": [
-        "Alt Shift ArrowDown"
-      ],
+      "keys": ["Alt Shift ArrowDown"],
       "selector": ".jp-Notebook:focus"
     },
     {
       "command": "notebook:paste-cell-above",
-      "keys": [
-        "Shift V"
-      ],
+      "keys": ["Shift V"],
       "selector": ".jp-Notebook:focus"
     },
     {
       "command": "docmanager:reload",
-      "keys": [
-        "Shift R"
-      ],
+      "keys": ["Shift R"],
       "selector": ".jp-Notebook:focus"
     }
   ]
