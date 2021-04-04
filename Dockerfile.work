@@ -59,5 +59,9 @@ RUN cp ./.include/overrides.json /opt/conda/share/jupyter/lab/settings
 USER $user
 WORKDIR $home
 
+# enable caching in "lintr" (the cache won't persist between Docker
+# sessions, but that shouldn't matter)
+RUN Rscript -e "library(styler); options('R.cache.rootPath'='~/.cache/R/R.cache'); styler::cache_info();"
+
 EXPOSE $jupyter_port
 CMD /opt/conda/bin/jupyter-lab --config=.include/jupyter_lab_config.py
