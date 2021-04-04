@@ -41,6 +41,7 @@ RUN mamba install --yes --channel conda-forge scikit-learn xgboost
 
 RUN mamba install --yes --channel conda-forge r-base r-essentials r-styler r-lintr
 RUN mamba install --yes --channel conda-forge r-tidyverse r-tidymodels r-xgboost
+RUN mamba install --yes --channel conda-forge r-dofuture r-doparallel
 RUN mamba install --yes --channel conda-forge r-ggpubr r-ggally
 
 # clean package cache
