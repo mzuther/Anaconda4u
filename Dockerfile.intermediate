@@ -44,6 +44,7 @@ RUN apt-get --assume-yes install x11-utils
 RUN apt-get --assume-yes clean
 
 RUN mamba update --all --yes
+RUN mamba clean --all
 
 RUN jupyter labextension install jupyterlab-theme-solarized-dark
 

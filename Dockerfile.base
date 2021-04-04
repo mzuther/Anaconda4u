@@ -50,6 +50,9 @@ RUN mamba install --yes --channel conda-forge jupytext
 # install ranger (simple file manager for troubleshooting)
 RUN mamba install --yes --channel conda-forge ranger-fm
 
+# clean package cache
+RUN mamba clean --all
+
 # run commands as non-root with a dedicated home directory
 RUN adduser --disabled-password --gecos GECOS --home $home --uid $uid $user
 

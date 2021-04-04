@@ -46,6 +46,10 @@ RUN mamba install --yes --channel conda-forge r-base r-essentials
 RUN mamba install --yes --channel conda-forge r-tidymodels
 RUN mamba install --yes --channel conda-forge r-xgboost
 RUN mamba install --yes --channel conda-forge r-ggpubr
+RUN mamba install --yes --channel conda-forge r-ggally
+
+# clean package cache
+RUN mamba clean --all
 
 RUN Rscript -e 'install.packages("lintr", repos="https://cloud.r-project.org/", dependencies=TRUE)'
 RUN Rscript -e 'install.packages("styler", repos="https://cloud.r-project.org/", dependencies=TRUE)'
