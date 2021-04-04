@@ -36,23 +36,16 @@ ARG jupyter_port
 USER root
 
 # xeus: Python kernel with support for Jupyter debugging
-RUN mamba install --yes --channel conda-forge xeus-python
-RUN mamba install --yes --channel conda-forge flake8
-RUN mamba install --yes --channel conda-forge yapf
+RUN mamba install --yes --channel conda-forge xeus-python flake8 yapf
+RUN mamba install --yes --channel conda-forge scikit-learn xgboost
 
-RUN mamba install --yes --channel conda-forge xgboost
-
-RUN mamba install --yes --channel conda-forge r-base r-essentials
-RUN mamba install --yes --channel conda-forge r-tidymodels
-RUN mamba install --yes --channel conda-forge r-xgboost
-RUN mamba install --yes --channel conda-forge r-ggpubr
-RUN mamba install --yes --channel conda-forge r-ggally
+RUN mamba install --yes --channel conda-forge r-base r-essentials r-styler r-lintr
+RUN mamba install --yes --channel conda-forge r-tidyverse r-tidymodels r-xgboost
+RUN mamba install --yes --channel conda-forge r-ggpubr r-ggally
 
 # clean package cache
 RUN mamba clean --all
 
-RUN Rscript -e 'install.packages("lintr", repos="https://cloud.r-project.org/", dependencies=TRUE)'
-RUN Rscript -e 'install.packages("styler", repos="https://cloud.r-project.org/", dependencies=TRUE)'
 RUN Rscript -e 'install.packages("wrapr", repos="https://cloud.r-project.org/", dependencies=TRUE)'
 
 # copy user settings ("--chown" ensures that copies are owned by user)

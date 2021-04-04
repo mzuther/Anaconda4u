@@ -38,14 +38,11 @@ USER root
 # speed up solving of conda environment
 RUN conda install --name base --channel conda-forge mamba
 
-# force installation of JupyterLab v3
-RUN mamba install --yes --channel conda-forge jupyterlab=3
+# force installation of JupyterLab v3 and support paired notebooks
+RUN mamba install --yes --channel conda-forge jupyterlab=3 jupytext
 
 # allow customizing JupyterLab
 RUN mamba install --yes --channel conda-forge nodejs
-
-# support paired notebooks
-RUN mamba install --yes --channel conda-forge jupytext
 
 # install ranger (simple file manager for troubleshooting)
 RUN mamba install --yes --channel conda-forge ranger-fm
