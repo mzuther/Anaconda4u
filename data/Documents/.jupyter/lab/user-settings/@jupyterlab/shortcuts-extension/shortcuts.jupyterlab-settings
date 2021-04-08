@@ -29,6 +29,12 @@
       "command": "docmanager:reload",
       "keys": ["Shift R"],
       "selector": ".jp-Notebook:focus"
+    },
+    {
+      "command": "notebook:replace-selection",
+      "args": { "text": " %>%" },
+      "keys": ["Ctrl Shift M"],
+      "selector": ".jp-Notebook"
     }
   ]
 }
