@@ -40,9 +40,9 @@ RUN mamba install --yes --channel conda-forge xeus-python flake8 yapf
 RUN mamba install --yes --channel conda-forge scikit-learn xgboost
 
 RUN mamba install --yes --channel conda-forge r-base r-essentials r-styler r-lintr
-RUN mamba install --yes --channel conda-forge r-tidyverse r-tidymodels r-xgboost
-RUN mamba install --yes --channel conda-forge r-dofuture r-doparallel
-RUN mamba install --yes --channel conda-forge r-ggpubr r-ggally
+RUN mamba install --yes --channel conda-forge r-tidyverse r-tidymodels r-dofuture r-doparallel
+RUN mamba install --yes --channel conda-forge r-corrr r-ggpubr r-ggally
+RUN mamba install --yes --channel conda-forge r-randomforest r-ranger r-xgboost
 
 # clean package cache
 RUN mamba clean --all
