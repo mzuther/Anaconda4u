@@ -35,15 +35,14 @@ ARG jupyter_port
 # run as root
 USER root
 
-# facilitate installation of R packages
-RUN apt-get --assume-yes update
-RUN apt-get --assume-yes install build-essential
+RUN mamba update --yes --all
 
-# install X11 libraries and a few tools
-RUN apt-get --assume-yes install x11-utils
-RUN apt-get --assume-yes clean
+# force installation of JupyterLab v3 and support paired notebooks
+RUN mamba install --yes --channel conda-forge jupyterlab=3 jupytext
 
-RUN mamba update --all --yes
+# allow customizing JupyterLab
+RUN mamba install --yes --channel conda-forge nodejs
+
 RUN mamba clean --all
 
 RUN jupyter labextension install jupyterlab-theme-solarized-dark
