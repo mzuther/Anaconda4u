@@ -95,7 +95,7 @@ printf "Building work image...\n\n"
 docker build \
     --file="./Dockerfile.work" \
     --tag "$docker_tag.work:latest" \
-    --tag "$docker_tag.work:$(date +%Y-%m)" \
+    --tag "$docker_tag.work:$(date +%Y-%m-%d)" \
     --build-arg=base_image="$docker_tag.intermediate" \
     --build-arg=user="$username" \
     --build-arg=uid="$uid" \

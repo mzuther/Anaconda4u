@@ -34,8 +34,8 @@ Snail).
 
 I regularly re-build the work image from scratch by executing
 `./build.sh --no-cache`. Work images are labelled with _two_ tags:
-`anaconda4u.work:latest` and `anaconda4u.work:2021-03` (using the
-current year and month).
+`anaconda4u.work:latest` and `anaconda4u.work:2021-04-09` (using the
+current date).
 
 So when an update introduces a bug or you want to re-visit an old
 project, all you have to do is open your editor, change a single line
