@@ -35,14 +35,13 @@ ARG jupyter_port
 # run as root
 USER root
 
-RUN mamba update --yes --all
-
 # force installation of JupyterLab v3 and support paired notebooks
 RUN mamba install --yes --channel conda-forge jupyterlab=3 jupytext
 
 # allow customizing JupyterLab
 RUN mamba install --yes --channel conda-forge nodejs
 
+RUN mamba update --yes --all
 RUN mamba clean --all
 
 RUN jupyter labextension install jupyterlab-theme-solarized-dark
