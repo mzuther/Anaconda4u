@@ -40,6 +40,7 @@ RUN mamba install --yes --channel conda-forge jupyterlab=3 jupytext
 
 # allow customizing JupyterLab
 RUN mamba install --yes --channel conda-forge nodejs
+RUN mamba install --yes --channel conda-forge jupyterlab_execute_time
 
 RUN mamba update --yes --all
 RUN mamba clean --all
