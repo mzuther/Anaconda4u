@@ -1,4 +1,5 @@
 {
   "kernelShutdown": true,
+  "recordTiming": true,
   "scrollPastEnd": false
 }

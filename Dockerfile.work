@@ -44,6 +44,8 @@ RUN mamba install --yes --channel conda-forge r-tidyverse r-tidymodels r-dofutur
 RUN mamba install --yes --channel conda-forge r-corrr r-ggpubr r-ggally
 RUN mamba install --yes --channel conda-forge r-randomforest r-ranger r-xgboost
 
+RUN mamba install --yes --channel conda-forge jupyterlab_execute_time
+
 RUN mamba update --yes --all
 RUN mamba clean --all
 
