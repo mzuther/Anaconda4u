@@ -45,6 +45,7 @@ RUN mamba install --yes --channel conda-forge r-corrr r-ggpubr r-ggally
 RUN mamba install --yes --channel conda-forge r-randomforest r-ranger r-xgboost
 RUN mamba install --yes --channel conda-forge r-liblinear r-kernlab r-rpart r-earth
 RUN mamba install --yes --channel conda-forge r-kknn r-flexsurv r-survival
+RUN mamba install --yes --channel conda-forge r-shiny r-shinycssloaders r-shinyfeedback r-shinythemes r-waiter
 
 RUN mamba update --yes --all
 RUN mamba clean --all
