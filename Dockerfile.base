@@ -40,7 +40,7 @@ RUN apt-get --assume-yes update
 RUN apt-get --assume-yes install build-essential
 
 # install X11 libraries and a few tools
-RUN apt-get --assume-yes install x11-utils
+RUN apt-get --assume-yes install x11-utils less
 RUN apt-get --assume-yes clean
 
 # speed up solving of conda environment
