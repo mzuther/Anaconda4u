@@ -31,7 +31,7 @@ export username
 uid=$(id -u)
 export uid
 
-export docker_tag_original="continuumio/anaconda3"
+export docker_tag_original="continuumio/miniconda3"
 export docker_tag="anaconda4u"
 
 export docker_home="/home/$username"

@@ -37,7 +37,9 @@ USER root
 
 # xeus: Python kernel with support for Jupyter debugging
 RUN mamba install --yes --channel conda-forge xeus-python flake8 yapf
-RUN mamba install --yes --channel conda-forge scikit-learn xgboost plotly
+RUN mamba install --yes --channel conda-forge scikit-learn numpy pandas
+RUN mamba install --yes --channel conda-forge matplotlib plotly seaborn
+RUN mamba install --yes --channel conda-forge xgboost
 
 RUN mamba install --yes --channel conda-forge r-base r-essentials r-styler r-lintr
 RUN mamba install --yes --channel conda-forge r-tidyverse r-tidymodels r-dofuture r-doparallel r-dorng

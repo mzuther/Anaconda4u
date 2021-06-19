@@ -43,7 +43,8 @@ RUN apt-get --assume-yes install build-essential
 RUN apt-get --assume-yes install x11-utils less
 RUN apt-get --assume-yes clean
 
-# speed up solving of conda environment
+# speed up solving of conda environment (also see
+# https://github.com/conda/conda/issues/9367#issuecomment-793968239)
 RUN conda install --name base --channel conda-forge mamba
 
 # install ranger (simple file manager for troubleshooting)
